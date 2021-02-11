@@ -1,13 +1,30 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@media only screen  and (max-width:600px){
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+    .mainSearch{
+        height: 60vh;
+    }
+    
+
+    .queryBuilder{
+        width: 100%;
+ 
+    }
+
+    .queryBuilder form{
+        flex-direction: column;
+    }
+
+    .queryBuilder form select,.queryBuilder form input{
+        padding: 5px;
+    }
+    .searchButton{
+        width: 100%;
+      }
+
+    .features{
+        grid-template-columns: 1fr;
+        width: 90vw;
+      }
+
 }
