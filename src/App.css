@@ -33,7 +33,7 @@
 
 
 .mainSearch{
-  height: 35vh;
+  height: 50vh;
   background-color: rgba(100, 115, 115, 0.1);
   padding: 20px;
   display: flex;
@@ -42,33 +42,50 @@
   align-items: center;
   gap: 10px;
 
+  background-image: url('./img/philipp-berndt-5i0GnoTTjSE-unsplash.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   
 }
 
 .mainSearch h1{
   margin-bottom: 30px;
+  color: white;
 }
 
 .searchButton{
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   padding: 5px;
   border-radius: 4px;
+  color: gray;
   margin-top: 10px;
   width: 20%;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .queryBuilder{
   position: relative;
+
 }
+
+
+
 .queryBuilder form{
  display: flex;
  flex-direction: row;
  gap: 10px;
+
  
 }
 
-
+.queryBuilder form input,.queryBuilder form select{
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
 .loginLayout{
 
