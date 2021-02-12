@@ -27,4 +27,13 @@
         width: 90vw;
       }
 
+      .loginLayout .slides .content{
+          left: 50%;
+          transform: translate(-50%,0%);
+          width: 95vw;
+      }
+      .loginLayout .slides img{
+        display: none;
+      }
+
 }

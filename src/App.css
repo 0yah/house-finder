@@ -3,6 +3,10 @@
 
 }
 
+::-webkit-scrollbar{
+
+  display: none;
+}
 .features{
   position: relative;
   left: 50%;
@@ -62,4 +66,61 @@
  flex-direction: row;
  gap: 10px;
  
+}
+
+
+
+.loginLayout{
+
+   gap: 10px;
+   height: 95vh;
+
+
+}
+.loginLayout .slides{
+  position: relative;
+  
+  height: -webkit-fill-available;
+
+}
+
+.loginLayout .slides img{
+  height: 100%;
+  width: 100%;
+}
+.loginLayout .slides .content{
+  padding: 40px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: rgba(250, 250, 250, 0.9);
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.loginLayout .slides .content h1{
+  align-self: center;
+  margin-bottom: 30px;
+}
+.loginLayout .content form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+} 
+
+.loginLayout .content form input,.loginLayout .content form button{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+
+}
+
+
+
+.reasonLayout{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
