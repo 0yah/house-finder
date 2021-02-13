@@ -141,3 +141,40 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
+
+
+.listingLayout{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,0%);
+  width: 80vw;
+  gap:20px;
+}
+
+.listingLayout .filters{
+  background-color: red;
+  height: 65vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.listingCard{
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+ 
+}
+
+.listingCard img{
+  height: auto;
+  width: 100%;
+}
+
+.listingCard .content{
+  display: flex;
+  flex-direction: column;
+}

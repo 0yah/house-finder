@@ -12,7 +12,7 @@ import { View } from "./components/View";
 import { Home } from "./components/Home";
 import { Add } from "./components/Add";
 import { Update } from "./components/Update";
-
+import { Listing } from "./components/Listing";
 
 const App=()=> {
   return (
@@ -41,6 +41,7 @@ const App=()=> {
           <Route path="/" exact component={Home}/>
           <Route path="/login" exact component={Login}/>
           <Route path="/view/:id" exact component={View}/>
+          <Route path="/listing" exact component={Listing}/>
           <Route path="/add" exact component={Add}/>
           <Route path="/update/:id" exact component={Update}/>
       
