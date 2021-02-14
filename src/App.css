@@ -142,8 +142,11 @@
   gap: 20px;
 }
 
-
+.hideDesktop{
+  display: none;
+}
 .listingLayout{
+  margin: 10px;
   display: grid;
   grid-template-columns: 1fr 3fr;
   position: relative;
@@ -162,19 +165,30 @@
   gap: 10px;
 }
 
+.listingLayout .content{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+}
+
 .listingCard{
   width: 70%;
+  min-width: fit-content;
   display: flex;
   flex-direction: row;
+  height: 20vh;
+  gap: 10px;
  
 }
 
 .listingCard img{
-  height: auto;
-  width: 100%;
+  height: 100%;
+  width: auto;
 }
 
 .listingCard .content{
   display: flex;
   flex-direction: column;
+  gap: 1px;
 }
