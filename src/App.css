@@ -192,3 +192,38 @@
   flex-direction: column;
   gap: 1px;
 }
+
+.listingViewLayout{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  position: relative;
+  width: 80vw;
+  left: 50%;
+  transform: translate(-50%,0%);
+}
+
+.listingViewLayout .media img{
+  height: auto;
+  width: 100%;
+}
+
+.listingViewLayout .media{
+  position: relative;
+}
+
+.listingViewLayout .media .slides{
+  position: absolute;
+  right: 50%;
+  margin: 5px;
+  bottom:0;
+  transform: translate(0%,-50%);
+}
+
+
+
+.listingViewLayout .content .contacts form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

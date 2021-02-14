@@ -1,6 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 export const Listing = () => {
 
+    const [listing, setListing] = useState([32,2,3,5,6,2,4,6,42,132,45,23,56])
+
+    const renderListing = () => {
+        return listing.map((value,index) => {
+            return <div className="card listingCard" onClick={()=>{
+                window.location.href= `/view/${index}`
+            }}>
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
+                <div className="content">
+                    <h6>House {index+1}</h6>
+                    <span className="location">Location</span>
+                    <p>fdjfdkjjk jnkdjnkjnfdkj</p>
+                </div>
+            </div>
+        });
+
+    }
     return <div>
         <div className="listingLayout">
             <div className="hideDesktop mobileFilter">
@@ -35,111 +52,7 @@ export const Listing = () => {
             </div>
 
             <div className="content">
-
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 1</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-
-
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 2</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 3</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 4</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 5</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 6</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 7</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 8</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 9</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-                <div className="card listingCard">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
-
-
-                    <div className="content">
-                        <h6>House 10</h6>
-                        <span className="location">Location</span>
-                        <p>fdjfdkjjk jnkdjnkjnfdkj</p>
-                    </div>
-                </div>
-
+                {renderListing()}
             </div>
         </div>
     </div>
