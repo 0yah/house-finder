@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 export const Home = () => {
     const [locations, setlocations] = useState([]);
+    const [latestListings, setLatestListings] = useState([1, 2, 3,4]);
     const [qlocation, setqlocation] = useState();
     const [qtype, setqtype] = useState();
     const [qprice, setqprice] = useState();
@@ -9,6 +10,23 @@ export const Home = () => {
     useEffect(() => {
 
     }, []);
+
+    const renderLatest = () => {
+        return latestListings.map((value, index) => {
+            return <div className="card featureCard">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
+                <div className="content">
+                <span className="price">KES 1.8mill</span>
+                <h2>House {index+1}</h2>
+
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+               
+                </div>
+               
+            </div>
+        })
+    }
     return <div>
 
         <div className="mainSearch">
@@ -49,41 +67,11 @@ export const Home = () => {
         </div>
 
         <div className="featureBreaker">
-            <span>Title</span>
+            <span>Latest Listings</span>
         </div>
         <div className="features">
 
-            <div className="card featureCard">
-                <h2>Lorem</h2>
-
-
-                <p>
-                    fdjvkjndf
-                </p>
-            </div>
-
-            <div className="card featureCard">
-                <h2>Lorem</h2>
-                <p>
-                    fdjvkjndf
-                </p>
-            </div>
-
-
-            <div className="card featureCard">
-                <h2>Lorem</h2>
-
-                <p>
-                    fdjvkjndf
-                </p>
-            </div>
-            <div className="card featureCard">
-                <h2>Lorem</h2>
-
-                <p>
-                    fdjvkjndf
-                </p>
-            </div>
+            {renderLatest()}
         </div>
     </div>
 }
