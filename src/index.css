@@ -1,14 +1,11 @@
 @media only screen  and (max-width:600px){
 
-
     .mainSearch{
         height: 60vh;
     }
     
-
     .queryBuilder{
-        width: 100%;
- 
+        width: 100%; 
     }
 
     .queryBuilder form{
@@ -32,6 +29,7 @@
           transform: translate(-50%,0%);
           width: 95vw;
       }
+
       .loginLayout .slides img{
         display: none;
       }
@@ -83,7 +81,5 @@
           height: auto;
           width: 100%;
       }
-      
-      
 
 }

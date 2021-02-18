@@ -88,8 +88,6 @@
 
 }
 
-
-
 .queryBuilder form{
  display: flex;
  flex-direction: row;
@@ -105,23 +103,20 @@
 }
 
 .loginLayout{
-
    gap: 10px;
    height: 95vh;
-
-
 }
-.loginLayout .slides{
-  position: relative;
-  
-  height: -webkit-fill-available;
 
+.loginLayout .slides{
+  position: relative;  
+  height: -webkit-fill-available;
 }
 
 .loginLayout .slides img{
   height: 100%;
   width: 100%;
 }
+
 .loginLayout .slides .content{
   padding: 40px;
   position: absolute;
@@ -134,10 +129,12 @@
   flex-direction: column;
   gap: 5px;
 }
+
 .loginLayout .slides .content h1{
   align-self: center;
   margin-bottom: 30px;
 }
+
 .loginLayout .content form{
   display: flex;
   flex-direction: column;
@@ -148,10 +145,7 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 2px;
-
 }
-
-
 
 .reasonLayout{
   display: grid;
@@ -162,6 +156,7 @@
 .hideDesktop{
   display: none;
 }
+
 .listingLayout{
   margin: 10px;
   display: grid;
@@ -188,8 +183,6 @@
   flex-direction: row;
 }
 
-
-
 .listingLayout .filters form{
   display: flex;
   flex-direction: column;
@@ -200,9 +193,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 5px;
-
 }
-
 
 .controller input{
   width: 50%;
@@ -213,7 +204,6 @@
 }
 
 .applyButton{
-
   text-align: center;
   border: 1px solid #ccc;
   padding: 5px;
@@ -234,7 +224,6 @@
   flex-direction: row;
   height: 20vh;
   gap: 10px;
- 
 }
 
 .listingCard img{
@@ -276,10 +265,10 @@
   transform: translate(0%,-50%);
 }
 
-
 .listingViewLayout .content .contacts{
   display: none;
 }
+
 .listingViewLayout .content .contacts form{
   display: flex;
   flex-direction: column;
@@ -291,7 +280,6 @@
   width: fit-content;
   padding: 10px;
   border-radius: 5px;
-  
 }
 
 .basics{
