@@ -37,9 +37,11 @@ export const Home = () => {
                         setqtype(e.target.value)
                     }}>
                         <option selected disabled>Category</option>
-                        <option value="Bungalow">Bungalow</option>
-                        <option value="Apartments">Apartments</option>
-                        <option value="Masionette">Masionette</option>
+                        <option value="Bedsitter">Bedsitter</option>
+                        <option value="Single rooms">Single rooms</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Shop">Shop</option>
+                        <option value="Full contained house">Full contained house</option>
 
                     </select>
 
