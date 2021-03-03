@@ -29,3 +29,5 @@ firestore.rules
 firebase.json
 .firebaserc
 storage.rules
+
+firebase.js
