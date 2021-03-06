@@ -287,3 +287,52 @@
   flex-direction: column;
   gap: 4px;
 }
+
+.addListing{
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,0%);
+  width: 80vw;
+}
+
+.addListing form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addListing form input,.addListing form select{
+  padding: 5px;
+}
+
+.addListing form button{
+  padding: 5px;
+  
+}
+
+
+.suggestions{
+  border: 1px solid black;
+ display: flex;
+ flex-direction: column; 
+ padding: 4px;
+}
+
+.suggestions .suggestion{
+  padding: 2px;
+}
+.suggestions .suggestion:hover{
+  background-color: rgb(62, 62, 255);
+  color: white;
+}
+
+
+
+ul{
+  list-style: none;
+}
+
+.images img{
+  height: auto;
+  width: 10%;
+}
