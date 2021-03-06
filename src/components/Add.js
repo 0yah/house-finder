@@ -113,8 +113,16 @@ export const Add = () => {
     }
 
     const addHouse = () => {
+
+        let house = {
+            name:houseName,
+            price:housePrice,
+            
+            
+        }
         uploadImage().then((url)=>{
             console.log(url);
+            house.img =url;
         }).catch((error)=>{
             console.log(error);
         })
