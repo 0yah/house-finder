@@ -292,7 +292,8 @@
   position: relative;
   left: 50%;
   transform: translate(-50%,0%);
-  width: 80vw;
+  width: 75vw;
+  padding: 50px;
 }
 
 .addListing form{

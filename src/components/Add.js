@@ -17,7 +17,7 @@ export const Add = () => {
     const [houseType, setHouseType] = useState();
     const [housePrice, setHousePrice] = useState();
     const [houseLocation, setHouseLocation] = useState();
-    const [uploadProgress,setUploadProgress] =useState(0);
+    const [uploadProgress, setUploadProgress] = useState(0);
 
     const [agentName, setAgentName] = useState();
     const [agentEmail, setAgentEmail] = useState();
@@ -39,18 +39,18 @@ export const Add = () => {
         setValue(e.target.value);
     };
 
-    const handleSelect = ({description}) => {
+    const handleSelect = ({ description }) => {
         setValue(description, false);
         getGeocode({ address: description })
-      .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        console.log("📍 Coordinates: ", { lat, lng });
-      })
-      .catch((error) => {
-        console.log("😱 Error: ", error);
-      });
+            .then((results) => getLatLng(results[0]))
+            .then(({ lat, lng }) => {
+                console.log("📍 Coordinates: ", { lat, lng });
+            })
+            .catch((error) => {
+                console.log("😱 Error: ", error);
+            });
 
-      //console.log(val);
+        //console.log(val);
     };
 
 
@@ -61,14 +61,14 @@ export const Add = () => {
             const {
                 place_id,
                 structured_formatting: { main_text, secondary_text },
-              } = info;
+            } = info;
 
-            return <span className="suggestion" onClick={() => { setHouseLocation(value);handleSelect(info); }}>
-                
-          <strong>{main_text}</strong> <small>{secondary_text}</small>
-                </span>
+            return <span className="suggestion" onClick={() => { setHouseLocation(value); handleSelect(info); }}>
 
-            
+                <strong>{main_text}</strong> <small>{secondary_text}</small>
+            </span>
+
+
         })
 
     };
@@ -78,31 +78,31 @@ export const Add = () => {
             var uploadTask = storage.ref(`/Listing/${houseName}.png`).put(houseImg);
 
 
-            uploadTask.on("state_changed",(snapshot)=>{
+            uploadTask.on("state_changed", (snapshot) => {
 
                 var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 console.log('Upload is ' + progress + '% done');
                 setUploadProgress(progress);
-                
-            },(error)=>{
+
+            }, (error) => {
                 setUploadProgress(0);
                 reject(error);
-            },(result)=>{
+            }, (result) => {
 
-                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=>{
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
 
 
                     resolve(downloadURL);
                     setUploadProgress(0);
-                
+
                     var data = {
-                        name:houseName,
-                        location:houseLocation,
-                        bedrooms:houseBedRoom,
-                        type:houseType,
-                        agent_name:agentName,
-                        agent_phone:agentPhone,
-                        agent_email:agentEmail,
+                        name: houseName,
+                        location: houseLocation,
+                        bedrooms: houseBedRoom,
+                        type: houseType,
+                        agent_name: agentName,
+                        agent_phone: agentPhone,
+                        agent_email: agentEmail,
                     };
 
                     console.log(data);
@@ -115,22 +115,31 @@ export const Add = () => {
     const addHouse = () => {
 
         let house = {
-            name:houseName,
-            price:housePrice,
-            
-            
+            name: houseName,
+            price: housePrice,
+            agentEmail,
+            agentPhone,
+            category: houseCategory,
+            type: houseType,
+
+
         }
+
+        console.log(house);
+        /*
         uploadImage().then((url)=>{
             console.log(url);
             house.img =url;
         }).catch((error)=>{
             console.log(error);
-        })
+        });
+        */
+
     }
 
     const selectImages = (e) => {
 
-        setUploadFile(URL.createObjectURL(e.target.files[0])); 
+        setUploadFile(URL.createObjectURL(e.target.files[0]));
         //setHouseImages([...houseImages,e.target.files]);
         setHouseImg(e.target.files[0]);
     }
@@ -144,53 +153,95 @@ export const Add = () => {
 
         <div className="addListing">
             <form>
-                <input type="text" placeholder="Name" onChange={(e) => { setHouseName(e.target.value) }} />
-                <input type="file" multiple onChange={(e) => { selectImages(e)}} />
 
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Name" onChange={(e) => { setHouseName(e.target.value) }} />
+                    <label for="floatingInput">House Name</label>
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02" multiple onChange={(e) => { selectImages(e) }} />
+                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                </div>
                 <div className="images">
-                {renderSelectImages()}
+                    {renderSelectImages()}
                 </div>
 
                 <div>Selected {houseImages} Images</div>
-                <input type="number" placeholder="Price" onChange={(e) => { setHousePrice(e.target.value) }} />
-                <input type="number" placeholder="Bedrooms" onChange={(e) => { setHouseBedroom(e.target.value) }} />
-                <input type="text" placeholder="Agent Name" onChange={(e) => { setAgentName(e.target.value) }} />
-                <input type="email" placeholder="Agent Email" onChange={(e) => { setAgentEmail(e.target.value) }} />
-                <input type="text" placeholder="Agent Number" onChange={(e) => { setAgentPhone(e.target.value) }} />
-
-                <select onChange={(e) => {
-                    setHouseType(e.target.value);
-                }} value={houseType}>
-                    <option selected disabled>Type</option>
-                    <option value="Rent">Rent</option>
-                    <option value="Sale">Sale</option>
-
-                </select>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">KES</span>
+                    <input type="text" class="form-control" placeholder="Price" aria-label="Username" aria-describedby="basic-addon1" />
+                </div>
 
 
-                <select onChange={(e) => {
-                    setHouseCategory(e.target.value);
-                }} value={houseCategory}>
-                    <option selected disabled>Category</option>
-                    <option value="Bedsitter">Bedsitter</option>
-                    <option value="Single rooms">Single rooms</option>
-                    <option value="Hostel">Hostel</option>
-                    <option value="Shop">Shop</option>
-                    <option value="Full contained house">Full contained house</option>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" type="number" placeholder="Price" onChange={(e) => { setHousePrice(e.target.value) }} />
+                    <label for="floatingInput">House Price</label>
+                </div>
 
-                </select>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" type="number" placeholder="Bedrooms" onChange={(e) => { setHouseBedroom(e.target.value) }} />
+                    <label for="floatingInput">Bedrooms</label>
+                </div>
 
-                <input
 
-                    value={value}
-                    onChange={handleInput}
-                    disabled={!ready}
-                    placeholder="Where are you going?"
-                />
 
-                {status === "OK" && <div className="suggestions">{renderSuggestions()}</div>}
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" type="text" placeholder="Agent Name" onChange={(e) => { setAgentName(e.target.value) }} />
+                    <label for="floatingInput">Agent Name</label>
+                </div>
 
-                <button className="btn btn-primary" onClick={()=>{addHouse()}} type="button">
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" type="email" placeholder="Agent Email" onChange={(e) => { setAgentEmail(e.target.value) }} />
+                    <label for="floatingInput">Agent Email</label>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" type="text" placeholder="Agent Number" onChange={(e) => { setAgentPhone(e.target.value) }} />
+                    <label for="floatingInput">Agent Phone</label>
+                </div>
+
+
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" onChange={(e) => {
+                        setHouseType(e.target.value);
+                    }} value={houseType}>
+                        <option value="Rent">For Rent</option>
+                        <option value="Sale">For Sale</option>
+                    </select>
+                    <label for="floatingSelectGrid">Type</label>
+                </div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" onChange={(e) => {
+                        setHouseCategory(e.target.value);
+                    }} value={houseCategory}>
+                        <option value="Bedsitter">Bedsitter</option>
+                        <option value="Single rooms">Single rooms</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Shop">Shop</option>
+                        <option value="Full contained house">Full contained house</option>
+
+                    </select>
+                    <label for="floatingSelectGrid">Category</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput"
+                        value={houseLocation}
+                        onChange={(e) => setHouseLocation(e.target.value)}
+                        placeholder="Location"
+                        type="text"
+                    />
+                    <label for="floatingInput">Location</label>
+                </div>
+
+
+
+                <button className="btn btn-primary" onClick={() => { addHouse() }} type="button">
                     Add House
             </button>
             </form>
@@ -205,3 +256,16 @@ export const Add = () => {
         </div>
     </div>
 }
+
+
+/*
+  <input
+
+      value={value}
+      onChange={handleInput}
+      disabled={!ready}
+      placeholder="Location"
+  />
+
+  {status === "OK" && <div className="suggestions">{renderSuggestions()}</div>}
+*/
