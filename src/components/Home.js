@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { storage, listingRef } from "../firebase";
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import $ from 'jquery';
+
 export const Home = () => {
+
+    let currentLocation = useLocation()
+    let myNavigator = useHistory();
     const [locations, setlocations] = useState([]);
-    const [latestListings, setLatestListings] = useState([1, 2, 3,4]);
+    const [latestListings, setLatestListings] = useState([]);
     const [qlocation, setqlocation] = useState();
     const [qtype, setqtype] = useState();
     const [qprice, setqprice] = useState();
@@ -9,25 +16,40 @@ export const Home = () => {
 
     useEffect(() => {
 
+        let results = [];
+        listingRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data());
+                results.push(doc.data());
+            });
+
+            setLatestListings(results);
+            $('.loader').css({
+                display:'none'
+            });
+        });
     }, []);
 
     const renderLatest = () => {
-        return latestListings.map((value, index) => {
+        return latestListings.slice(0, 4).map((value, index) => {
             return <div className="card featureCard">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
+                <img src={value.img} />
                 <div className="content">
-                <span className="price">KES 1.8mill</span>
-                <h2>House {index+1}</h2>
+                    <h2>{value.name}</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               
                 </div>
-               
+
             </div>
         })
     }
     return <div>
+
+        <div className="loader">
+            <div class="spinner-border" role="status" id="loader">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
         <div className="mainSearch">
             <h1>House Finder</h1>
@@ -54,17 +76,26 @@ export const Home = () => {
                             return <option value={location.name}>{location.name}</option>
                         })}
 
-                        <option value="Bungalow">Bungalow</option>
-                        <option value="Apartments">Apartments</option>
-                        <option value="Masionette">Masionette</option>
+                        <option value="Bungalow">Nairobi</option>
+                        <option value="Apartments">Mombasa</option>
+                        <option value="Masionette">Kisumu</option>
+                        <option value="Masionette">Kwale</option>
+                        <option value="Masionette">Nakuru</option>
+                        <option value="Masionette">Naivasha</option>
 
                     </select>
                     <input type="number" onChange={(e) => {
                         setqprice(e.target.value)
-                    }} placeholder="Price" />
+                    }} placeholder="Minimum Price" />
+
+                    <input type="number" onChange={(e) => {
+                        setqprice(e.target.value)
+                    }} placeholder="Maximum Price" />
                 </form>
             </div>
-            <span className="searchButton">Search</span>
+            <span className="searchButton" onClick={() => {
+                myNavigator.push('/Listing');
+            }}>Search</span>
 
         </div>
 

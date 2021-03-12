@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import { storage, listingRef } from "../firebase";
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import $ from 'jquery';
+
 export const Listing = () => {
 
-    const [listing, setListing] = useState([32, 2, 3, 5, 6, 2, 4, 6, 42, 132, 45, 23, 56])
+    const [listing, setListing] = useState([]);
+    let currentLocation = useLocation();
+    let myNavigator = useHistory();
+
+    useEffect(()=>{
+        let results = [];
+        listingRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data());
+
+                let m = doc.data();
+                m.id = doc.id;
+                results.push(m);
+
+
+            });
+            setListing(results);
+            $('.loader').css({
+                display:'none'
+            });
+        });
+
+    },[])
 
     const renderListing = () => {
         return listing.map((value, index) => {
             return <div className="card listingCard" onClick={() => {
-                window.location.href = `/view/${index}`
+             
+                myNavigator.push(`/view/${value.id}`,value);
             }}>
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80" />
+                <img src={value.img} />
                 <div className="content">
-                    <h6>House {index + 1}</h6>
-                    <span className="location">Location</span>
+                    <h6>{value.name}</h6>
+                    <span className="location">{value.location}</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
             </div>
@@ -19,6 +46,14 @@ export const Listing = () => {
 
     }
     return <div>
+
+
+<div className="loader">
+            <div class="spinner-border" role="status" id="loader">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
         <div className="listingLayout">
             <div className="hideDesktop mobileFilter">
                 <span>Filters</span>

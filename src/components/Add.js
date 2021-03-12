@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { storage, firestore } from "../firebase";
+import { storage, listingRef } from "../firebase";
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
@@ -22,7 +22,7 @@ export const Add = () => {
     const [agentName, setAgentName] = useState();
     const [agentEmail, setAgentEmail] = useState();
     const [agentPhone, setAgentPhone] = useState();
-    const [houseImages, setHouseImages] = useState([1]);
+    const [houseImages, setHouseImages] = useState([]);
 
 
     const {
@@ -41,6 +41,7 @@ export const Add = () => {
 
     const handleSelect = ({ description }) => {
         setValue(description, false);
+        setHouseLocation(description);
         getGeocode({ address: description })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
@@ -95,17 +96,7 @@ export const Add = () => {
                     resolve(downloadURL);
                     setUploadProgress(0);
 
-                    var data = {
-                        name: houseName,
-                        location: houseLocation,
-                        bedrooms: houseBedRoom,
-                        type: houseType,
-                        agent_name: agentName,
-                        agent_phone: agentPhone,
-                        agent_email: agentEmail,
-                    };
 
-                    console.log(data);
                 });
 
             });
@@ -114,40 +105,92 @@ export const Add = () => {
 
     const addHouse = () => {
 
-        let house = {
-            name: houseName,
-            price: housePrice,
-            agentEmail,
-            agentPhone,
-            category: houseCategory,
-            type: houseType,
 
+        if (houseName === undefined ||
+            housePrice === undefined ||
+            agentEmail === undefined ||
+            agentPhone === undefined ||
+            houseCategory === undefined ||
+            houseType === undefined
+
+        ) {
+
+            return
 
         }
 
-        console.log(house);
-        /*
-        uploadImage().then((url)=>{
+
+        uploadImage().then((url) => {
             console.log(url);
-            house.img =url;
-        }).catch((error)=>{
+            var house = {
+                name: houseName,
+                price: housePrice,
+                agentEmail: agentEmail,
+                agentPhone: agentPhone,
+                agentName:agentName,
+                category: houseCategory,
+                type: houseType,
+                img: url,
+                location:houseLocation
+
+            }
+
+            console.log(house);
+
+            listingRef.add(house).then((result) => {
+
+                console.log(result);
+                console.log(house);
+
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            house.img = url;
+        }).catch((error) => {
             console.log(error);
         });
-        */
+
 
     }
 
     const selectImages = (e) => {
 
         setUploadFile(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0]);
         //setHouseImages([...houseImages,e.target.files]);
         setHouseImg(e.target.files[0]);
+
+        let selectedImages = Array.from(e.target.files).map(image => URL.createObjectURL(image));
+        setHouseImages(selectedImages);
+
+
     }
 
     const renderSelectImages = () => {
+
         return houseImages.map((value, index) => {
-            return <img src={uploadFile} alt={`Image ${index + 1}`} />
+            return <img src={value} alt={`Image ${index + 1}`} />
         });
+
+    }
+
+
+    const uploadFiles = () => {
+
+        return new Promise((resolve, reject) => {
+            houseImages.map((value, index) => {
+                console.log(value);
+
+
+            });
+
+            resolve(houseImages);
+
+        });
+
+
+
     }
     return <div>
 
@@ -165,23 +208,23 @@ export const Add = () => {
                     <label class="input-group-text" for="inputGroupFile02">Upload</label>
                 </div>
                 <div className="images">
-                    {renderSelectImages()}
+                    <span>Selected Images</span>
+                    <div className="media">
+                        {renderSelectImages()}
+                    </div>
+
                 </div>
 
-                <div>Selected {houseImages} Images</div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">KES</span>
-                    <input type="text" class="form-control" placeholder="Price" aria-label="Username" aria-describedby="basic-addon1" />
-                </div>
 
 
                 <div class="form-floating mb-3">
+
                     <input class="form-control" id="floatingInput" type="number" placeholder="Price" onChange={(e) => { setHousePrice(e.target.value) }} />
                     <label for="floatingInput">House Price</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" type="number" placeholder="Bedrooms" onChange={(e) => { setHouseBedroom(e.target.value) }} />
+                    <input class="form-control" id="floatingInput" type="number" min='1' placeholder="Bedrooms" onChange={(e) => { setHouseBedroom(e.target.value) }} />
                     <label for="floatingInput">Bedrooms</label>
                 </div>
 
@@ -229,15 +272,19 @@ export const Add = () => {
                     <label for="floatingSelectGrid">Category</label>
                 </div>
 
+
+
+
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput"
-                        value={houseLocation}
-                        onChange={(e) => setHouseLocation(e.target.value)}
-                        placeholder="Location"
-                        type="text"
-                    />
+                    <input value={value}
+                        onChange={handleInput}
+                        disabled={!ready}
+                        placeholder="Location" type="email" class="form-control" id="floatingInput" />
                     <label for="floatingInput">Location</label>
+
+                    {status === "OK" && <div className="suggestions">{renderSuggestions()}</div>}
                 </div>
+
 
 
 
@@ -259,6 +306,19 @@ export const Add = () => {
 
 
 /*
+
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput"
+                        value={houseLocation}
+                        onChange={(e) => setHouseLocation(e.target.value)}
+                        placeholder="Location"
+                        type="text"
+                    />
+                    <label for="floatingInput">Location</label>
+                </div>
+
+
   <input
 
       value={value}

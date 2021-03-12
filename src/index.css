@@ -82,4 +82,12 @@
           width: 100%;
       }
 
+      .addListing{
+        width: 100vw;
+      }
+
+      .addListing form{
+        gap: 5px;
+      }
+
 }
